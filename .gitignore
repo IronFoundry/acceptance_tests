@@ -12,3 +12,19 @@ tmp/*
 spec/fixtures/**/.git
 chef/tmp
 *.iml
+
+# test_app VS ignores
+test_apps/**/packages/
+test_apps/**/bin/
+test_apps/**/obj/
+test_apps/**/*.exe
+test_apps/**/*.suo
+test_apps/**/packages/
+test_apps/**/output/
+test_apps/**/*.user
+test_apps/**/_ReSharper.*/
+test_apps/**/_ReSharper.*/
+test_apps/**/*.Publish.xml
+test_apps/**/.JustCode/
+test_apps/**/*.sdf
+
