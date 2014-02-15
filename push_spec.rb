@@ -25,6 +25,11 @@ module IronFoundry
       expect(result).to match(/Push successful!/i)
     end
 
+    def ensure_app_is_stopped
+      result = execute("stop #{@appname}")
+      expect(result).to be_empty
+    end
+
     before :all do
       @domain= 'qa.ironfoundry.org'
       @endpoint = 'http://api.' + @domain
@@ -74,7 +79,7 @@ module IronFoundry
       it 'can be pushed twice'
       it 'can set environment variables'
       it 'can push a node app (windows dea/warden can co-exist with linux dea/warden)'
-
+      it 'should push multiple instances'
     end
 
     context 'when .net app is deleted' do
@@ -96,7 +101,6 @@ module IronFoundry
         result = execute('apps')
         expect(result).to_not match(/#{@appname}/i)
       end
-
     end
 
     context 'when running .net app is stopped' do
@@ -118,7 +122,29 @@ module IronFoundry
         result = execute("health #{@appname}")
         expect(result).to match(/stopped/i)
       end
+    end
 
+    context 'when running .net app is started' do
+      before(:all) do
+        ensure_app_is_pushed
+        ensure_app_is_stopped
+
+        @start_result = execute("start #{@appname}")
+      end
+
+      it 'reports success' do
+        expect(@start_result).to match(/push successful/i)
+      end
+
+      it 'is addressable at expected endpoint' do
+        response = open("http://#{@appname}.#{@domain}")
+        expect(response.status).to include('200')
+      end
+
+      it 'health reports as running' do
+        result = execute("health #{@appname}")
+        expect(result).to match(/running/i)
+      end
     end
   end
 end
