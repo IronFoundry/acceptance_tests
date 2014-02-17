@@ -18,6 +18,7 @@ shared_context 'when targeting ironfoundry' do
 
   def ensure_app_is_pushed
     ensure_app_is_deleted
+
     result = execute("push #{@appname} #{@app_options}")
     expect(result).to match(/Push successful!/i)
   end
@@ -30,7 +31,7 @@ shared_context 'when targeting ironfoundry' do
   before :all do
     @domain= 'qa.ironfoundry.org'
     @endpoint = 'http://api.' + @domain
-    @appname = Socket.gethostname + '-acceptance'
+    @appname = Socket.gethostname.gsub(/\./,'-') + '-acceptance'
     @app_options = '--path assets/asp_net_app --stack mswin-clr'
     #@app_options = '--path assets/node_app --command "node app.js" '
     @user = 'admin'

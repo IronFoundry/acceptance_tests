@@ -1,7 +1,7 @@
 require 'rspec'
 require 'open-uri'
 require 'socket'
-require './when_targeting_ironfoundry_context.rb'
+require './spec/when_targeting_ironfoundry_context.rb'
 
 describe 'when .net app is pushed' do
   include_context 'when targeting ironfoundry'
