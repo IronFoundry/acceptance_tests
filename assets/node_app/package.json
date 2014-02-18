@@ -1,10 +1,15 @@
 {
-  "name": "http-server",
-  "version": "0.0.1",
-  "author": "James Foster <github@jgfoster.net>",
-  "description": "webserver demo from http://nodejs.org/",
-  "dependencies" : [ ],
-  "engines": {
-    "node": ">=0.10"
-  }
+  "name": "sample_node_app",
+  "version": "0.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "express": "~3.4.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
 }
