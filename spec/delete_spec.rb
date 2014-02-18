@@ -17,7 +17,7 @@ describe 'when .net app is deleted' do
   end
 
   it 'is not addressable at expected endpoint' do
-    expect { open("http://#{@appname}.#{@domain}") }.to raise_error(/404/)
+    expect { open(app_endpoint) }.to raise_error(/404/)
   end
 
   it 'is not in the list of apps' do

@@ -17,7 +17,7 @@ describe 'when running .net app is stopped' do
   end
 
   it 'is not addressable at expected endpoint' do
-    expect { open("http://#{@appname}.#{@domain}") }.to raise_error(/404/)
+    expect { open(app_endpoint) }.to raise_error(/404/)
   end
 
   it 'health reports as stopped' do

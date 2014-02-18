@@ -18,7 +18,7 @@ describe 'when running .net app is started' do
   end
 
   it 'is addressable at expected endpoint' do
-    response = open("http://#{@appname}.#{@domain}")
+    response = open(app_endpoint)
     expect(response.status).to include('200')
   end
 
