@@ -22,7 +22,10 @@ shared_context 'when targeting ironfoundry' do
 
   def ensure_app_is_pushed
     ensure_app_is_deleted
+    push_app
+  end
 
+  def push_app
     result = execute("push #{@appname} #{@app_options}")
     expect(result).to match(/Push successful!/i)
   end
