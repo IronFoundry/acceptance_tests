@@ -7,7 +7,7 @@ describe 'when .net app is deleted' do
   include_context 'when targeting ironfoundry'
 
   before(:all) do
-    ensure_app_is_pushed
+    ensure_clean_app_is_pushed
 
     @delete_result = execute("delete #{@appname} --routes")
   end

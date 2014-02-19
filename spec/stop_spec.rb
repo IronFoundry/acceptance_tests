@@ -7,7 +7,7 @@ describe 'when running .net app is stopped' do
   include_context 'when targeting ironfoundry'
 
   before(:all) do
-    ensure_app_is_pushed
+    ensure_clean_app_is_pushed
 
     @stop_result = execute("stop #{@appname}")
   end

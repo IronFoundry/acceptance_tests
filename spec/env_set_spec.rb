@@ -10,11 +10,11 @@ describe 'when environment setting set on app' do
   ENVIRONMENT_VALUE = 'TestEnvValue'
 
   before(:all) do
-    ensure_app_is_pushed
+    ensure_clean_app_is_pushed
     @set_result = execute("set-env #{@appname} #{ENVIRONMENT_KEY} #{ENVIRONMENT_VALUE}")
 
     # Re-push app to update variables
-    push_app
+    ensure_app_is_pushed
   end
 
   it 'should return empty for set result' do

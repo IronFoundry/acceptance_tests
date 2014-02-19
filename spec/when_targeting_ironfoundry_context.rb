@@ -20,12 +20,12 @@ shared_context 'when targeting ironfoundry' do
     expect(result).to match(/Unknown app/i) unless result.empty?
   end
 
-  def ensure_app_is_pushed
+  def ensure_clean_app_is_pushed
     ensure_app_is_deleted
-    push_app
+    ensure_app_is_pushed
   end
 
-  def push_app
+  def ensure_app_is_pushed
     result = execute("push #{@appname} #{@app_options}")
     expect(result).to match(/Push successful!/i)
   end
@@ -49,8 +49,8 @@ shared_context 'when targeting ironfoundry' do
 
     @endpoint = 'http://api.' + domain
     @appname = Socket.gethostname.gsub(/\./,'-') + '-acceptance'
-    @app_options = '--path assets/asp_net_app --stack mswin-clr'
-    #@app_options = '--path assets/node_app --command "node app.js" '
+    #@app_options = '--path assets/asp_net_app --stack mswin-clr'
+    @app_options = '--path assets/node_app --command "node app.js" '
 
     result = execute("target #{@endpoint}")
     expect(result).to be_empty

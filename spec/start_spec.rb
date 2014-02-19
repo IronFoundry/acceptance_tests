@@ -7,7 +7,7 @@ describe 'when running .net app is started' do
   include_context 'when targeting ironfoundry'
 
   before(:all) do
-    ensure_app_is_pushed
+    ensure_clean_app_is_pushed
     ensure_app_is_stopped
 
     @start_result = execute("start #{@appname}")

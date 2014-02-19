@@ -10,14 +10,14 @@ describe 'when environment setting unset from app' do
   ENVIRONMENT_VALUE = 'TestEnvValue'
 
   before(:all) do
-    ensure_app_is_pushed
+    ensure_clean_app_is_pushed
     set_result = execute("set-env #{@appname} #{ENVIRONMENT_KEY} #{ENVIRONMENT_VALUE}")
     expect(set_result).to eq("TIP: Use 'cf push' to ensure your env variable changes take effect.\n")
 
     # Re-push app to update variables
-    push_app
+    ensure_app_is_pushed
     @clear_result = execute("unset-env #{@appname} #{ENVIRONMENT_KEY}")
-    push_app
+    ensure_app_is_pushed
   end
 
   it 'should return empty for clear result' do
