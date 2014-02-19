@@ -3,7 +3,7 @@ require 'open-uri'
 require 'json'
 require './spec/when_targeting_ironfoundry_context.rb'
 
-describe 'when environment setting pushed to app' do
+describe 'when environment setting set on app' do
   include_context 'when targeting ironfoundry'
 
   ENVIRONMENT_KEY = 'TestEnvKey'

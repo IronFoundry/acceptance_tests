@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "description": "",
   "main": "app.js",
+  "engines": {
+    "node": ">=0.10"
+  },
   "dependencies": {
     "express": "~3.4.8"
   },

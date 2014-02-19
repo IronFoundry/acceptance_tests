@@ -20,8 +20,8 @@ app.get('/api/environment/:id', function(req, res) {
 	}
 	else {
 		res.json({ 
-			name:  req.params.id,	
-			value: envValue,
+			Name:  req.params.id,	
+			Value: envValue,
 		});
 	}
 });
