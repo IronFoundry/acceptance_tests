@@ -8,7 +8,13 @@ app.get('/', function(req, res){
 });
 
 app.get('/api/environment',function(req, res) {
-	res.send("Query for specific environments at /api/environment/id");	
+
+	var variables = [];
+	for(var e in process.env) {
+		variables.push({ Name: e, Value: process.env[e]});
+	}
+
+	res.json(variables);
 });
 
 app.get('/api/environment/:id', function(req, res) {
@@ -25,6 +31,21 @@ app.get('/api/environment/:id', function(req, res) {
 		});
 	}
 });
+
+app.logEntry = function(req, res) {
+	if (req.query.entry) {
+		console.log(req.query.entry);
+		res.send("Posted: " + req.query.entry);
+	}
+	else
+	{
+		res.send(400, 'Entry query parameter requried');
+	}
+};
+
+app.get('/api/log', app.logEntry);
+app.put('/api/log', app.logEntry);
+
 
 app.listen(port);
 

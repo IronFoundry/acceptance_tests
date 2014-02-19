@@ -28,3 +28,5 @@ test_apps/**/*.Publish.xml
 test_apps/**/.JustCode/
 test_apps/**/*.sdf
 
+assets/node_app/node_modules/
+
