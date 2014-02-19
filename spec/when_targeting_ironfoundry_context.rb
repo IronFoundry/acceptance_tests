@@ -49,8 +49,8 @@ shared_context 'when targeting ironfoundry' do
 
     @endpoint = 'http://api.' + domain
     @appname = Socket.gethostname.gsub(/\./,'-') + '-acceptance'
-    #@app_options = '--path assets/asp_net_app --stack mswin-clr'
-    @app_options = '--path assets/node_app --command "node app.js" '
+    @app_options = '--path assets/asp_net_app --stack mswin-clr'
+    #@app_options = '--path assets/node_app --command "node app.js" '
 
     result = execute("target #{@endpoint}")
     expect(result).to be_empty
