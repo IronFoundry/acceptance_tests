@@ -13,15 +13,16 @@ describe 'when running .net app is stopped' do
   end
 
   it 'reports success' do
-    expect(@stop_result).to be_empty
+    expect(@stop_result).to match(/^OK$/i)
   end
 
   it 'is not addressable at expected endpoint' do
     expect { open(app_endpoint) }.to raise_error(/404/)
   end
 
-  it 'health reports as stopped' do
-    result = execute("health #{@appname}")
-    expect(result).to match(/stopped/i)
+  it 'app status reports as stopped' do
+    result = execute("app #{@appname}")
+    expect(result).to match(/requested state: stopped/i)
+    expect(result).to match(/There are no running instances of this app/i)
   end
 end

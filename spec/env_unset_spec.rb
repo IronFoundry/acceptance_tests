@@ -3,29 +3,26 @@ require 'open-uri'
 require 'json'
 require './spec/when_targeting_ironfoundry_context.rb'
 
-describe 'when environment setting unset from app' do
+describe 'when environment variable unset from app' do
   include_context 'when targeting ironfoundry'
-
-  ENVIRONMENT_KEY = 'TestEnvKey'
-  ENVIRONMENT_VALUE = 'TestEnvValue'
 
   before(:all) do
     ensure_clean_app_is_pushed
-    set_result = execute("set-env #{@appname} #{ENVIRONMENT_KEY} #{ENVIRONMENT_VALUE}")
-    expect(set_result).to eq("TIP: Use 'cf push' to ensure your env variable changes take effect.\n")
+    result = execute("set-env #{@appname} #{@environment_key} #{@environment_value}")
+    expect(result).to match(/^OK$/i)
 
     # Re-push app to update variables
     ensure_app_is_pushed
-    @clear_result = execute("unset-env #{@appname} #{ENVIRONMENT_KEY}")
+    @clear_result = execute("unset-env #{@appname} #{@environment_key}")
     ensure_app_is_pushed
   end
 
-  it 'should return empty for clear result' do
-    expect(@clear_result).to eq("TIP: Use 'cf push' to ensure your env variable changes take effect.\n")
+  it 'should indicate success' do
+    expect(@clear_result).to match(/^OK$/i)
   end
 
   it 'should not be visible to the app' do
-    expect { open(app_endpoint + "/api/environment/#{ENVIRONMENT_KEY}") }.to raise_error(/404/)
+    expect { open(app_endpoint + "/api/environment/#{@environment_key}") }.to raise_error(/404/)
   end
 
 end

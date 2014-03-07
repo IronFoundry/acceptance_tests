@@ -9,7 +9,7 @@ describe 'When app writes to log' do
     ensure_clean_app_is_pushed
     @log_entry = 'APostedLogMessage'
 
-    log_cmd = "logs #{@appname}"
+    log_cmd = "logs #{@appname} -recent"
     @logs_before = execute(log_cmd)
 
     logResult=open(app_endpoint + "/api/log?entry=#{@log_entry}")

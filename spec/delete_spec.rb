@@ -9,11 +9,11 @@ describe 'when .net app is deleted' do
   before(:all) do
     ensure_clean_app_is_pushed
 
-    @delete_result = execute("delete #{@appname} --routes")
+    @delete_result = execute("delete #{@appname} -f")
   end
 
   it 'reports success after delete' do
-    expect(@delete_result).to be_empty
+    expect(@delete_result).to match(/^OK$/i)
   end
 
   it 'is not addressable at expected endpoint' do

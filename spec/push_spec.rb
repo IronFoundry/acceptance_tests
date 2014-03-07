@@ -13,7 +13,7 @@ describe 'when .net app is pushed' do
   end
 
   it 'reports success after push' do
-    expect(@push_result).to match(/Push successful!/i)
+    expect(@push_result).to match(/#0\s+running/i)
   end
 
   it 'is addressable at expected endpoint' do
@@ -26,9 +26,10 @@ describe 'when .net app is pushed' do
     expect(result).to match(/#{@appname}/i)
   end
 
-  it 'health reports as running' do
-    result = execute("health #{@appname}")
-    expect(result).to match(/running/i)
+  it 'app status reports as running' do
+    result = execute("app #{@appname}")
+    expect(result).to match(/requested state: started/i)
+    expect(result).to match(/#0\s+running/i)
   end
 
   it 'reports application stats'
