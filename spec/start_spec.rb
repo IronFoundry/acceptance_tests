@@ -3,7 +3,7 @@ require 'open-uri'
 require 'socket'
 require './spec/when_targeting_ironfoundry_context.rb'
 
-describe 'when running .net app is started' do
+describe 'when stopped .net app is started' do
   include_context 'when targeting ironfoundry'
 
   before(:all) do
@@ -14,7 +14,8 @@ describe 'when running .net app is started' do
   end
 
   it 'reports success' do
-    expect(@start_result).to match(/push successful/i)
+    expect(@start_result).to match(/app started/i)
+    expect(@start_result).to match(/#0\s+running/i)
   end
 
   it 'is addressable at expected endpoint' do
@@ -22,9 +23,10 @@ describe 'when running .net app is started' do
     expect(response.status).to include('200')
   end
 
-  it 'health reports as running' do
-    result = execute("health #{@appname}")
-    expect(result).to match(/running/i)
+  it 'app status reports as running' do
+    result = execute("app #{@appname}")
+    expect(result).to match(/requested state: started/i)
+    expect(result).to match(/#0\s+running/i)
   end
 end
 

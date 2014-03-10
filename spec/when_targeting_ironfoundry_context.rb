@@ -7,7 +7,7 @@ shared_context 'when targeting ironfoundry' do
   env_accessor :user, :password, :domain, :test_org, :test_space
 
   def execute(cmd)
-    expanded_cmd = "cf --script #{cmd} 2>&1"
+    expanded_cmd = "cf #{cmd} 2>&1"
     expanded_cmd.gsub('/', '\\') if RUBY_PLATFORM !~ /linux/
 
     output = `#{expanded_cmd}`
@@ -16,8 +16,8 @@ shared_context 'when targeting ironfoundry' do
   end
 
   def ensure_app_is_deleted
-    result = execute("delete #{@appname} --routes")
-    expect(result).to match(/Unknown app/i) unless result.empty?
+    result = execute("delete #{@appname} -f")
+    expect(result).to match(/^OK$/i)
   end
 
   def ensure_clean_app_is_pushed
@@ -27,12 +27,12 @@ shared_context 'when targeting ironfoundry' do
 
   def ensure_app_is_pushed
     result = execute("push #{@appname} #{@app_options}")
-    expect(result).to match(/Push successful!/i)
+    expect(result).to match(/#0\s+running/i)
   end
 
   def ensure_app_is_stopped
     result = execute("stop #{@appname}")
-    expect(result).to be_empty
+    expect(result).to match(/^OK$/i)
   end
 
   def app_endpoint
@@ -49,13 +49,18 @@ shared_context 'when targeting ironfoundry' do
 
     @endpoint = 'http://api.' + domain
     @appname = Socket.gethostname.gsub(/\./,'-') + '-acceptance'
-    @app_options = '--path assets/asp_net_app --stack mswin-clr'
+    @app_options = '-p assets/asp_net_app -s mswin-clr'
     #@app_options = '--path assets/node_app --command "node app.js" '
 
-    result = execute("target #{@endpoint}")
-    expect(result).to be_empty
+    @environment_key = 'TestEnvKey'
+    @environment_value = 'TestEnvValue'
 
-    result = execute("login --username #{user} --password #{password} --organization #{test_org}  --space #{test_space}")
-    expect(result).to be_empty
+    ENV['CF_COLOR'] = 'false'
+
+    result = execute("api #{@endpoint}")
+    expect(result).to match(/^OK$/i)
+
+    result = execute("login -u #{user} -p #{password} -o #{test_org}  -s #{test_space}")
+    expect(result).to match(/^OK$/i)
   end
 end
