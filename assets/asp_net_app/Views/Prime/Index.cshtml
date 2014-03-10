@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @using (Html.BeginForm("PrimeSearch", "Prime", FormMethod.Get))
+    {
+        <p> 
+            Prime Search To: @Html.TextBox("PrimeSearchValue") <br/>
+            <input type="submit" value="PrimeSearch" />
+        </p>
+    }
+
+    <p>        
+            @{
+                if (@ViewBag.PrimeNumbers != null)
+                {
+                    <p>Prime Results:</p>
+                    <p>
+                    @foreach(int prime in @ViewBag.PrimeNumbers)
+                    {
+                        @(prime + ", ")
+                    }
+                    </p>
+                }
+            }        
+    </p>
+</p>
