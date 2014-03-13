@@ -52,8 +52,8 @@ shared_context 'when targeting ironfoundry' do
     @app_options = '-p assets/asp_net_app -s mswin-clr'
     #@app_options = '--path assets/node_app --command "node app.js" '
 
-    @environment_key = 'TestEnvKey'
-    @environment_value = 'TestEnvValue'
+    @environment_key = 'TESTKEY'
+    @environment_value = 'TESTVALUE'
 
     ENV['CF_COLOR'] = 'false'
 

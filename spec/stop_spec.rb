@@ -17,7 +17,7 @@ describe 'when running .net app is stopped' do
   end
 
   it 'is not addressable at expected endpoint' do
-    expect { open(app_endpoint) }.to raise_error(/404/)
+    expect { open(@endpoint) }.to raise_error(/404/)
   end
 
   it 'app status reports as stopped' do
