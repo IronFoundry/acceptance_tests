@@ -33,7 +33,6 @@ describe 'when .net app is pushed' do
   end
 
   it 'reports application stats'
-  it 'should push multiple instances'
 end
 
 describe 'when .net app is pushed twice in a row' do
