@@ -1,4 +1,5 @@
-﻿using asp_net_app.Models;
+﻿using System.Diagnostics;
+using asp_net_app.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,6 @@ namespace asp_net_app.Controllers
 {
     public class EnvironmentController : ApiController
     {
-
-
         public IEnumerable<EnvironmentSetting> GetEnvironment()
         {
             var settings = Environment.GetEnvironmentVariables();
