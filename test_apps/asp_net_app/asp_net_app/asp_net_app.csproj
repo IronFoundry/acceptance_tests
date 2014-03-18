@@ -135,6 +135,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\EnvironmentSetting.cs" />
+    <Compile Include="Models\InstanceInfo.cs" />
     <Compile Include="Prime\PrimeSieve.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

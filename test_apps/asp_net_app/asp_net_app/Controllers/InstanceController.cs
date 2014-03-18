@@ -11,16 +11,13 @@ namespace asp_net_app.Controllers
 {
     public class InstanceController : ApiController
     {
-        [HttpGet]
-        public int ProcessId()
+        public InstanceInfo Get()
         {
-            return Process.GetCurrentProcess().Id;
-        }
-
-        [HttpGet]
-        public string MachineName()
-        {
-            return Environment.MachineName;
+            return new InstanceInfo
+            {
+                MachineName = Environment.MachineName,
+                ProcessId = Process.GetCurrentProcess().Id
+            };
         }
     }
 }
