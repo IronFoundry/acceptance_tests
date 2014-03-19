@@ -22,12 +22,12 @@ describe 'when .net app is scaled to multiple instances' do
   end
 
   it 'has all instances in rotation' do
-    response = open(app_endpoint + "/api/instance/processid")
+    response = open(app_endpoint + "/api/instance")
     first_process_id = response.read
     second_process_id = ''
-    
+
     for i in 0..100
-      response = open(app_endpoint + "/api/instance/processid")
+      response = open(app_endpoint + "/api/instance")
       second_process_id = response.read
       break if first_process_id != second_process_id
       sleep(0.25)
