@@ -2,4 +2,12 @@ require 'rspec/core/rake_task'
 
 RSpec::Core::RakeTask.new(:spec)
 
-task :default => :spec
+task :add_cf_path do
+  puts 'Updating path to CF cli'
+  oldPath = ENV['PATH'];
+  ENV['PATH'] = Rake.application.original_dir + '/tools/cf;' + oldPath;
+end
+
+task :run_tests => [:add_cf_path, :spec]
+
+task :default => [:run_tests]
