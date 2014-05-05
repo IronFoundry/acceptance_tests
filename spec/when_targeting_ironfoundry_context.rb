@@ -49,7 +49,7 @@ shared_context 'when targeting ironfoundry' do
 
     @endpoint = 'http://api.' + domain
     @appname = Socket.gethostname.gsub(/\./,'-') + '-acceptance'
-    @app_options = '-p assets/asp_net_app -s windows2012'
+    @app_options = '-p assets/asp_net_app -s windows2012 -m 1024M'
     #@app_options = '--path assets/node_app --command "node app.js" '
 
     @environment_key = 'TESTKEY'
