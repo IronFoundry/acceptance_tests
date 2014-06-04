@@ -8,7 +8,7 @@ shared_context 'when targeting ironfoundry' do
 
   def execute(cmd)
     expanded_cmd = "cf #{cmd} 2>&1"
-    expanded_cmd.gsub('/', '\\') if RUBY_PLATFORM !~ /linux/
+    expanded_cmd.gsub('/', '\\') if RUBY_PLATFORM !~ /linux|darwin/
 
     output = `#{expanded_cmd}`
     output = output.gsub(/Fast Debug.+\n/, '')  # consume strings showing up
